@@ -47,12 +47,12 @@ module.exports = {
             .setTimestamp();
 
             message.channel.send({embeds: [embed]})
-        }else if(args.length == 3){
+        }else if(args.length >= 3){
             if(args[0].toLowerCase() == "add"){
                 const cname = args[1];
-                const pname = args[2];
+                const pname = message.content.split(' ').splice(3).join(' ');
 
-                if(cname == undefined || pname == undefined){
+                if(cname == undefined || pname == undefined || pname == "" || pname == null){
                     const embed = new Discord.MessageEmbed()
                     .setTitle('Incorrect usage :warning:')
                     .setColor("#ed0909")

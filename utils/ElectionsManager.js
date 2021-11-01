@@ -83,14 +83,35 @@ class ElectionsManger {
         
         const groupByKey = (list, key) => list.reduce((hash, obj) => ({...hash, [obj[key]]:( hash[obj[key]] || [] ).concat(obj)}), {})
 
-        let temp = [];
+        let temp1 = [];
 
         if(candidates != undefined){
             for(let c of candidates){
-                if(groupByKey(votes, "sname")[c.name] == undefined) return "";
-                temp.push(`- ${c.name} | ${c.party}: **${groupByKey(votes, "sname")[c.name].length}**`)
+                if(groupByKey(votes, "sname")[c.name] != undefined){
+                    temp1.push({
+                        name: c.name,
+                        party: c.party,
+                        votes: groupByKey(votes, "sname")[c.name].length
+                    })
+                }else{
+                    temp1.push({
+                        name: c.name,
+                        party: c.party,
+                        votes: 0
+                    })
+                }
+                
             }
-            return temp.join("\n");
+
+
+            const temp = temp1.sort((a, b) => (a.votes > b.votes) ? -1 : 1)
+            const string = [];
+
+            for(let t of temp){
+                string.push(`- ${t.name} | ${t.party}: **${t.votes}**`)
+            }
+            
+            return string.join("\n");
         }else{
             return "";
         }

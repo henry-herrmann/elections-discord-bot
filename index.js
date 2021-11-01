@@ -34,16 +34,7 @@ const footer = "Created by Henryhre"
 client.login(process.env.TOKEN);
 
 client.once("ready", (ready) =>{
-    const activities_list = [
-        "made by Henryhre",
-        "DM me with '!vote'"
-    ];
-
-    setInterval(() => {
-        const index = Math.floor(Math.random() * (activities_list.length -1) +1); 
-        client.user.setActivity(activities_list[index], {type: 'WATCHING'}); 
-    }, 3000);
-
+    client.user.setActivity("**DM me with '!vote'", {type: 4});
 })
 
 client.on('interactionCreate', async interaction => {
