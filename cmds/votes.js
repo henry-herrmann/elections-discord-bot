@@ -39,7 +39,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('Incorrect usage :warning:')
                     .setColor("#ed0909")
-                    .setDescription(`>>> .votes (<remove> <Voter-ID>)`)
+                    .setDescription(`>>> ${Data.prefix}votes (<remove> <Voter-ID>)`)
                     .setFooter(Index.footer)
                     .setTimestamp();
 
@@ -60,7 +60,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('Incorrect usage :warning:')
                 .setColor("#ed0909")
-                .setDescription(`>>> .votes (<remove> <Voter-ID>)`)
+                .setDescription(`>>> ${Data.prefix}votes (<remove> <Voter-ID>)`)
                 .setFooter(Index.footer)
                 .setTimestamp();
 
@@ -71,7 +71,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> .votes (<remove> <Voter-ID>)`)
+            .setDescription(`>>> ${Data.prefix}votes (<remove> <Voter-ID>)`)
             .setFooter(Index.footer)
             .setTimestamp();
 

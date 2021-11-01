@@ -34,7 +34,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> .results`)
+            .setDescription(`>>> ${Data.prefix}results`)
             .setFooter(Index.footer)
             .setTimestamp();
 

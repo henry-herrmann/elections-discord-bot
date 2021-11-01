@@ -53,7 +53,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('Incorrect usage :warning:')
                     .setColor("#ed0909")
-                    .setDescription(`>>> .blacklist (<add, remove> <User-ID>)`)
+                    .setDescription(`>>> ${Data.prefix}blacklist (<add, remove> <User-ID>)`)
                     .setFooter(Index.footer)
                     .setTimestamp();
 
@@ -89,7 +89,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('Incorrect usage :warning:')
                     .setColor("#ed0909")
-                    .setDescription(`>>> .blacklist (<add, remove> <User-ID>)`)
+                    .setDescription(`>>> ${Data.prefix}blacklist (<add, remove> <User-ID>)`)
                     .setFooter(Index.footer)
                     .setTimestamp();
 
@@ -121,7 +121,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('Incorrect usage :warning:')
                 .setColor("#ed0909")
-                .setDescription(`>>> .blacklist (<add, remove> <User-ID>)`)
+                .setDescription(`>>> ${Data.prefix}blacklist (<add, remove> <User-ID>)`)
                 .setFooter(Index.footer)
                 .setTimestamp();
 
@@ -132,7 +132,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> .blacklist (<add, remove> <User-ID>)`)
+            .setDescription(`>>> ${Data.prefix}blacklist (<add, remove> <User-ID>)`)
             .setFooter(Index.footer)
             .setTimestamp();
 

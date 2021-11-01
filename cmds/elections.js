@@ -54,7 +54,7 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('Incorrect usage :warning:')
                 .setColor("#ed0909")
-                .setDescription(`>>> .elections (<on,off,stats)`)
+                .setDescription(`>>> ${Data.prefix}elections (<on,off,stats)`)
                 .setFooter(Index.footer)
                 .setTimestamp();
     
@@ -65,7 +65,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> .elections (<on,off,stats)`)
+            .setDescription(`>>> ${Data.prefix}elections (<on,off,stats)`)
             .setFooter(Index.footer)
             .setTimestamp();
     
