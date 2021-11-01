@@ -1,0 +1,40 @@
+{
+  "votes": [],
+  "candidates": [
+    {
+      "name": "Saber_Tester210",
+      "party": "Republic’s Sectorial Party"
+    },
+    {
+      "name": "Cirezo",
+      "party": "Independent"
+    },
+    {
+      "name": "SiddarthP",
+      "party": "Galactic Democratic Party"
+    },
+    {
+      "name": "starcreater12",
+      "party": "Independent"
+    },
+    {
+      "name": "Aye_ItzJessYT",
+      "party": "Independent"
+    },
+    {
+      "name": "TurtIe_Duck",
+      "party": "Bertian Party"
+    },
+    {
+      "name": "OperativePandora",
+      "party": "Galactic Democratic Party"
+    }
+  ],
+  "blacklist": [],
+  "config": [
+    {
+      "id": 1,
+      "status": false
+    }
+  ]
+}
