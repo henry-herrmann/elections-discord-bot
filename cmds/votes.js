@@ -39,7 +39,7 @@ module.exports = {
                     const embed = new Discord.MessageEmbed()
                     .setTitle('Incorrect usage :warning:')
                     .setColor("#ed0909")
-                    .setDescription(`>>> ${Data.prefix}votes (<remove> <Voter-ID>)`)
+                    .setDescription(`>>> ${Data.prefix}votes (<remove, clear> [<Voter-ID>])`)
                     .setFooter(Index.footer)
                     .setTimestamp();
 
@@ -60,10 +60,57 @@ module.exports = {
                 const embed = new Discord.MessageEmbed()
                 .setTitle('Incorrect usage :warning:')
                 .setColor("#ed0909")
-                .setDescription(`>>> ${Data.prefix}votes (<remove> <Voter-ID>)`)
+                .setDescription(`>>> ${Data.prefix}votes (<remove, clear> [<Voter-ID>])`)
                 .setFooter(Index.footer)
                 .setTimestamp();
 
+                message.channel.send({embeds: [embed]})
+                return;
+            }
+        }else if(args.length == 1){
+            if(args[0].toLowerCase() == "clear"){
+                const filter = m => m.author.id === message.author.id;
+                const collector = message.channel.createMessageCollector(filter, {max: '1', maxMatches: '1', time: "45000"});
+
+                const robloxEmbed = new Discord.MessageEmbed()
+                .setColor("#003bed")
+                .setTitle("Prompt will expire in 45 seconds")
+                .setDescription("❓ Are you sure you want to clear all votes from the vote database? **Reply with (Yes/No).**")
+                .setFooter(Index.footer)
+                .setTimestamp();
+                message.channel.send({embeds: [robloxEmbed]});
+
+                collector.on("collect", async m =>{
+                   if(m.content == "No." || m.content == "No" || m.content == "no" || m.content == "no." || m.content == "nO."){
+                       const embed = new Discord.MessageEmbed()
+                       .setColor("#ed0909")
+                       .setDescription(`❌ Prompt cancelled.`)
+                       .setFooter(Index.footer)
+                       .setTimestamp();
+
+                       message.channel.send({embeds: [embed]})
+                       return;
+                    }else if(m.content == "Yes." || m.content == "Yes" || m.content == "yes" || m.content == "yes."){
+                        em.clearVotes();
+
+                        var embed = new Discord.MessageEmbed()
+                        .setTitle("Votes cleared! :white_check_mark:")
+                        .setColor("#56d402")
+                        .setDescription(`All votes have been cleared.`)
+                        .setFooter(Index.footer)
+                        .setTimestamp();
+
+                        message.channel.send({embeds: [embed]})
+                    }
+                })
+            }else{
+                const embed = new Discord.MessageEmbed()
+                .setTitle('Incorrect usage :warning:')
+                .setColor("#ed0909")
+                .setDescription(`>>> ${Data.prefix}votes (<remove, clear> [<Voter-ID>])`)
+                .setFooter(Index.footer)
+                .setTimestamp();
+    
                 message.channel.send({embeds: [embed]})
                 return;
             }
@@ -71,7 +118,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> ${Data.prefix}votes (<remove> <Voter-ID>)`)
+            .setDescription(`>>> ${Data.prefix}votes (<remove, clear> [<Voter-ID>])`)
             .setFooter(Index.footer)
             .setTimestamp();
 

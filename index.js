@@ -20,6 +20,7 @@ client.commands = new Discord.Collection();
 
 const fs = require("fs");
 const { ElectionsManger } = require("./utils/ElectionsManager");
+const vote = require("./cmds/vote");
 const commandFiles = fs.readdirSync("./cmds/").filter(f => f.endsWith(".js"));
 
 for(file of commandFiles){
@@ -35,6 +36,8 @@ client.login(process.env.TOKEN);
 
 client.once("ready", (ready) =>{
     client.user.setActivity("**DM me with '!vote'", {type: 4});
+
+    
 })
 
 client.on('interactionCreate', async interaction => {
@@ -50,7 +53,7 @@ client.on('interactionCreate', async interaction => {
                 .setFooter(footer)
                 .setTimestamp();
     
-                message.author.send({embeds: [embed]})
+                interaction.reply({embeds: [embed]})
                 return;
             }
 
@@ -63,6 +66,13 @@ client.on('interactionCreate', async interaction => {
             .setFooter(footer)
             .setTimestamp();
             interaction.reply({embeds: [embed]})
+
+            const log = new Discord.MessageEmbed()
+            .setTitle("Vote log")
+            .setDescription(`User: <@${interaction.user.id}>\nVoted for: ${cname}`)
+            .setFooter(footer)
+            .setTimestamp();
+            client.channels.cache.get(Data.vote_log).send({embeds: [log]})
         }
     }          
 });

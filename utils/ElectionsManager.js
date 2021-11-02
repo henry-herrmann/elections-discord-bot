@@ -76,6 +76,11 @@ class ElectionsManger {
         }
     }
 
+    clearVotes(){
+        this.db.read();
+        this.db.get("votes").value().forEach((vote) =>{this.db.get("votes").remove({id: vote.id}).write()});
+    }
+
     getResults(){
         this.db.read()
         const votes = this.db.get("votes").value();
