@@ -31,7 +31,6 @@ for(file of commandFiles){
 
 const footer = "Created by Henryhre"
 
-
 client.login(process.env.TOKEN);
 
 client.once("ready", (ready) =>{
