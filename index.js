@@ -36,8 +36,6 @@ client.login(process.env.TOKEN);
 
 client.once("ready", (ready) =>{
     client.user.setActivity("**DM me with '!vote'", {type: 4});
-
-    
 })
 
 client.on('interactionCreate', async interaction => {
