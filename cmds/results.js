@@ -34,7 +34,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> ${Data.prefix}results`)
+            .setDescription(`>>> ${Data.prefix}results\n${Data.prefix}results post (Posts an embed which will be updated every 3 minutes displaying the live results.)`)
             .setFooter(Index.footer)
             .setTimestamp();
 

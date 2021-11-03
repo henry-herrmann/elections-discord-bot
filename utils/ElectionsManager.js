@@ -122,6 +122,16 @@ class ElectionsManger {
         }
     }
 
+    setLiveResult(msgid, cid){
+        this.db.read();
+        this.db.get("config").find({id: 2}).assign({msgid: msgid, cid: cid}).write();
+    }
+
+    getLiveResultMessageId(){
+        this.db.read();
+        return this.db.get("config").find({id: 2}).value();
+    }
+
     blacklistUser(vid){
         if(!this.isBlacklisted(vid)){
             this.db.get("blacklist").push({

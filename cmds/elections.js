@@ -50,6 +50,21 @@ module.exports = {
                 .setTimestamp();
 
                 message.channel.send({embeds: [embed]});
+            }else if(args[0].toLowerCase() == "live"){
+                const candidates = em.getCandidates() != undefined ? em.getCandidates().length : 0;
+                const votes = em.getVotes() != undefined ? em.getVotes().length : 0;
+                const blacklists = em.getBlacklists() != undefined ? em.getBlacklists().length : 0;
+
+                const embed = new Discord.MessageEmbed()
+                .setTitle('Election stats :chart_with_upwards_trend:')
+                .setDescription(`__Status:__ **${em.getElectionStatus() == true ? "Enabled" : "Disabled"}\n\n**Votes: **${votes.toString()}**\nCandidates: **${candidates.toString()}**\nBlacklists: **${blacklists.toString()}**`)
+                .setColor("#1e46f7")
+                .setFooter(Index.footer)
+                .setTimestamp();
+
+                message.channel.send({embeds: [embed]}).then((msg) =>{
+                    em.setLiveResultMessageId(msg.id)
+                })
             }else{
                 const embed = new Discord.MessageEmbed()
                 .setTitle('Incorrect usage :warning:')
