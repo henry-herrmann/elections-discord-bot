@@ -35,27 +35,30 @@ client.login(process.env.TOKEN);
 
 client.once("ready", (ready) =>{
     client.user.setActivity("**DM me with '!vote'", {type: 4});
-
+   
     setInterval(function(){ 
-       client.channels.cache.get(em.getLiveResultMessageId().cid).messages.fetch(em.getLiveResultMessageId().msgid).then((msg) =>{
-           var embed = msg.embeds[0];
+        if(em.getLiveResultMessageId() == undefined) return;
+        let channel = client.channels.cache.get(em.getLiveResultMessageId().cid);
+        if(channel == undefined) return;
 
-           if(embed != undefined){
-            const candidates = em.getCandidates() != undefined ? em.getCandidates().length : 0;
-            const votes = em.getVotes() != undefined ? em.getVotes().length : 0;
-            const blacklists = em.getBlacklists() != undefined ? em.getBlacklists().length : 0;
-
-            const embed = new Discord.MessageEmbed()
-            .setTitle('Election stats :chart_with_upwards_trend:')
-            .setDescription(`__Status:__ **${em.getElectionStatus() == true ? "Enabled" : "Disabled"}\n\n**Votes: **${votes.toString()}**\nCandidates: **${candidates.toString()}**\nBlacklists: **${blacklists.toString()}**`)
-            .setColor("#1e46f7")
-            .setFooter(Index.footer)
-            .setTimestamp();
-
-            msg.edit({embeds: [embed]});
-           }
-       })
-    }, 300);
+        channel.messages.fetch(em.getLiveResultMessageId().msgid).then((msg) =>{
+            var embed = msg.embeds[0];
+ 
+            if(embed != undefined){
+             const candidates = em.getCandidates() != undefined ? em.getCandidates().length : 0;
+             const votes = em.getVotes() != undefined ? em.getVotes().length : 0;
+ 
+             const embed = new Discord.MessageEmbed()
+             .setTitle('Live election results :tv:')
+             .setColor("#1e46f7")
+             .addField("Votes", votes.toString(), true)
+             .addField("Candidates", candidates.toString(), true)
+             .setFooter(footer)
+ 
+             msg.edit({embeds: [embed]});
+            }
+        })
+    }, 60000);
 })
 
 client.on('interactionCreate', async interaction => {

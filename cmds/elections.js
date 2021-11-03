@@ -53,17 +53,17 @@ module.exports = {
             }else if(args[0].toLowerCase() == "live"){
                 const candidates = em.getCandidates() != undefined ? em.getCandidates().length : 0;
                 const votes = em.getVotes() != undefined ? em.getVotes().length : 0;
-                const blacklists = em.getBlacklists() != undefined ? em.getBlacklists().length : 0;
 
                 const embed = new Discord.MessageEmbed()
-                .setTitle('Election stats :chart_with_upwards_trend:')
-                .setDescription(`__Status:__ **${em.getElectionStatus() == true ? "Enabled" : "Disabled"}\n\n**Votes: **${votes.toString()}**\nCandidates: **${candidates.toString()}**\nBlacklists: **${blacklists.toString()}**`)
+                .setTitle('Live election results :tv:')
                 .setColor("#1e46f7")
+                .addField("Votes", votes.toString(), true)
+                .addField("Candidates", candidates.toString(), true)
                 .setFooter(Index.footer)
-                .setTimestamp();
-
+                
+                
                 message.channel.send({embeds: [embed]}).then((msg) =>{
-                    em.setLiveResultMessageId(msg.id)
+                    em.setLiveResult(msg.id, msg.channel.id)
                 })
             }else{
                 const embed = new Discord.MessageEmbed()
