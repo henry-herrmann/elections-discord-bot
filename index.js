@@ -34,7 +34,16 @@ const footer = "Created by Henryhre"
 client.login(process.env.TOKEN);
 
 client.once("ready", (ready) =>{
-    client.user.setActivity("**DM me with '!vote'", {type: 4});
+    const activities_list = [
+        "Elections Bot",
+        "made by Henryhre",
+        "DM me with !vote to vote"
+    ];
+
+    setInterval(() => {
+        const index = Math.floor(Math.random() * (activities_list.length)); 
+        client.user.setActivity(activities_list[index], {type: 'WATCHING'}); 
+    }, 3000);
    
     setInterval(function(){ 
         if(em.getLiveResultMessageId() == undefined) return;

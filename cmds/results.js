@@ -1,7 +1,10 @@
 const Discord = require("discord.js");
 const Permission = require("../utils/Permission");
 const Data = require("../utils/Data");
-const Index = require("../index")
+const Index = require("../index");
+const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+
+const chartJSNodeCanvas = new ChartJSNodeCanvas({width: 500, height: 500, backgroundColour: 'white'});
 
 module.exports = {
     name: "results",
@@ -30,11 +33,54 @@ module.exports = {
 
             message.channel.send({embeds: [embed]})
             return;
+        }else if(args.length == 1){
+            if(args[0].toLowerCase() == "chart"){
+                const array = em.getResultArray();
+
+                (async () =>{
+
+                    var backcolors = [];
+                    var labels = [];
+                    var data = [];
+    
+                    for(const c of array){
+                        var color = random_rgba();
+                        backcolors.push(color);
+                        labels.push(c.name);
+                        data.push(c.votes.toString());
+                    }
+                    
+                    const chartData = {
+                        labels: labels,
+                        datasets: [{
+                          label: 'My First dataset',
+                          data: data,
+                          backgroundColor: backcolors,
+                          borderColor: backcolors,
+                          borderWidth: 1
+                        }]
+                      };
+                      
+                    const config = {
+                        type: 'pie',
+                        data: chartData,
+                        options: {}
+                    };
+
+                    var dataURL = await chartJSNodeCanvas.renderToDataURL(config)
+                    var data = dataURL.replace(/^data:image\/\w+;base64,/, "");
+    
+                    var buffer = new Buffer.from(data, "base64");
+                    const attach = new Discord.MessageAttachment(buffer);
+    
+                    message.channel.send({files: [attach]})  
+                })();
+            }
         }else{
             const embed = new Discord.MessageEmbed()
             .setTitle('Incorrect usage :warning:')
             .setColor("#ed0909")
-            .setDescription(`>>> ${Data.prefix}results\n${Data.prefix}results post (Posts an embed which will be updated every 3 minutes displaying the live results.)`)
+            .setDescription(`>>> ${Data.prefix}results\n${Data.prefix}results <chart>`)
             .setFooter(Index.footer)
             .setTimestamp();
 
@@ -42,4 +88,11 @@ module.exports = {
             return;
         }
     }
+}
+
+function random_rgba() {
+    var o = Math.round, r = Math.random, s = 255;
+
+
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ', 1)';
 }

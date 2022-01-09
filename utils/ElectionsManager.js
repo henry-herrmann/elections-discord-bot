@@ -122,6 +122,42 @@ class ElectionsManger {
         }
     }
 
+    getResultArray(){
+        this.db.read()
+        const votes = this.db.get("votes").value();
+        const candidates = this.db.get("candidates").value();
+        
+        const groupByKey = (list, key) => list.reduce((hash, obj) => ({...hash, [obj[key]]:( hash[obj[key]] || [] ).concat(obj)}), {})
+
+        let temp1 = [];
+
+        if(candidates != undefined){
+            for(let c of candidates){
+                if(groupByKey(votes, "sname")[c.name] != undefined){
+                    temp1.push({
+                        name: c.name,
+                        party: c.party,
+                        votes: groupByKey(votes, "sname")[c.name].length
+                    })
+                }else{
+                    temp1.push({
+                        name: c.name,
+                        party: c.party,
+                        votes: 0
+                    })
+                }
+                
+            }
+
+
+            const temp = temp1.sort((a, b) => (a.votes > b.votes) ? -1 : 1)
+            
+            return temp;
+        }else{
+            return [];
+        }
+    }
+
     setLiveResult(msgid, cid){
         this.db.read();
         this.db.get("config").find({id: 2}).assign({msgid: msgid, cid: cid}).write();
